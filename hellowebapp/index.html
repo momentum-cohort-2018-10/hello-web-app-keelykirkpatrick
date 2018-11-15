@@ -1,0 +1,24 @@
+
+
+{% extends 'base.html' %}
+{% block title %}
+    Homepage - {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    {% for thing in things %}
+        <h2>
+            <a href="{% url 'thing_detail' slug=thing.slug %}">
+                {{ thing.name }}
+            </a>
+        </h2>
+        <p>{{ thing.description }}</p>
+        {% if thing.social_accounts %}
+        <ul>
+            {% for account in thing.social_accounts.all %} 
+            <li>{{ account.network|title }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
